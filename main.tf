@@ -8,10 +8,11 @@ terraform {
     }
 }
 
-# using the -var="hcloud_token=..." CLI option
+# Set Hetzner Cloud token via environment variable
 variable "hcloud_token" {
     type = string
     sensitive = true
+    description = "Hetzner Cloud API Token"
 }
 
 # Configure the Hetzner Cloud Provider
