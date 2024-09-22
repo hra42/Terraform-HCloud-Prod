@@ -33,6 +33,11 @@ resource "hcloud_network_subnet" "nixos_subnet" {
     network_zone = "eu-central"
 }
 
+# Fetch SSH key from Hetzner Cloud
+data "hcloud_ssh_key" "prod-ssh-key" {
+  name = "prod"
+}
+
 # Create NixOS Server
 resource "hcloud_server" "nixos_server" {
     name        = "NixOS-Server"
@@ -40,7 +45,7 @@ resource "hcloud_server" "nixos_server" {
     server_type = "cx11"
     location    = "fsn1"
     user_data = file("user_data.sh")
-    ssh_keys  = ["prod"]
+    ssh_keys  = [data.hcloud_ssh_key.prod-ssh-key.id]
 
     labels = {
         "env" = "test"
