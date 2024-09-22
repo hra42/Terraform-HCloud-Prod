@@ -40,6 +40,7 @@ resource "hcloud_server" "nixos_server" {
     server_type = "cx11"
     location    = "fsn1"
     user_data = file("user_data.sh")
+    ssh_keys  = ["prod"]
 
     labels = {
         "env" = "test"
